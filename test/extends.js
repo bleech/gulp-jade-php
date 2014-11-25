@@ -7,7 +7,7 @@ var path = require('path');
 var fs = require('fs');
 var gutil = require('gulp-util');
 
-var filePath = path.join(__dirname, 'fixtures', 'extends.jade');
+var filePath = path.join(__dirname, 'fixtures', 'extends.php.jade');
 var base = path.join(__dirname, 'fixtures');
 var cwd = __dirname;
 

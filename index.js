@@ -1,32 +1,19 @@
 'use strict';
 
 var jade = require('jade');
-var extend = require('xtend');
+var jadePhp = require('jade-php');
 var through = require('through2');
 var ext = require('gulp-util').replaceExtension;
 var PluginError = require('gulp-util').PluginError;
 
-function handleCompile(contents, opts){
-  if(opts.client){
-    return opts.compileClient(contents, opts);
-  }
-
-  return opts.compile(contents, opts)(opts.locals || opts.data);
-}
+jadePhp(jade);
 
 function handleExtension(filepath, opts){
-  if(opts.client){
-    return ext(filepath, '.js');
-  }
-  return ext(filepath, '.html');
+  return ext(filepath, '');
 }
 
 module.exports = function(options){
-  options = options || {};
-  var opts = extend(options, {
-    compile: (options.jade || jade).compile,
-    compileClient: (options.jade || jade).compileClient
-  });
+  var opts = options || {};
 
   function CompileJade(file, enc, cb){
     opts.filename = file.path;
@@ -43,7 +30,7 @@ module.exports = function(options){
 
     if(file.isBuffer()){
       try {
-        file.contents = new Buffer(handleCompile(String(file.contents), opts));
+        file.contents = new Buffer(jade.render(String(file.contents), opts));
       } catch(e) {
         return cb(new PluginError('gulp-jade', e));
       }

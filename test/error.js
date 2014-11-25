@@ -6,7 +6,7 @@ var gulp = require('gulp');
 var task = require('../');
 var path = require('path');
 
-var filename = path.join(__dirname, './fixtures/jade-error.jade');
+var filename = path.join(__dirname, './fixtures/jade-error.php.jade');
 
 test('should emit errors of jade correctly', function(t){
   gulp.src(filename)

@@ -10,7 +10,7 @@ var path = require('path');
 var fs = require('fs');
 var extname = require('path').extname;
 
-var filename = path.join(__dirname, './fixtures/helloworld.jade');
+var filename = path.join(__dirname, './fixtures/helloworld.php.jade');
 
 // Mock Data Plugin
 // (not testing the gulp-data plugin options, just that gulp-jade can get its data from file.data)

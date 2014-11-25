@@ -4,11 +4,11 @@
 
 <table>
 <tr>
-<td>Package</td><td>gulp-jade</td>
+<td>Package</td><td>gulp-jade-php</td>
 </tr>
 <tr>
 <td>Description</td>
-<td>Compile Jade templates</td>
+<td>Compile Jade templates to PHP</td>
 </tr>
 <tr>
 <td>Node Version</td>
@@ -21,132 +21,21 @@
 Compile to HTML
 
 ```javascript
-var jade = require('gulp-jade');
+var jadePhp = require('gulp-jade-php');
 
 gulp.task('templates', function() {
-  var YOUR_LOCALS = {};
 
-  gulp.src('./lib/*.jade')
-    .pipe(jade({
-      locals: YOUR_LOCALS
-    }))
+  gulp.src('./lib/*.php.jade')
+    .pipe(jadePhp())
     .pipe(gulp.dest('./dist/'))
 });
 ```
-
-Compile to JS
-
-```javascript
-var jade = require('gulp-jade');
-
-gulp.task('templates', function() {
-  gulp.src('./lib/*.jade')
-    .pipe(jade({
-      client: true
-    }))
-    .pipe(gulp.dest('./dist/'))
-});
-```
-
-## Options
-
-All options supported by the [Jade API](http://jade-lang.com/api/) are supported
-
-__Note:__ `filename` option is taken from `path` property of incoming vinyl-file object. If you want to change it, use [gulp-rename](https://github.com/hparra/gulp-rename) before `gulp-jade` with desired path.
-
-In addition, you can pass in a `locals` or `data` option that will be used as locals for your HTML compilation.  The `locals` option takes precedence over the `data` option.
-
-If you want to use a different version of jade, or define jade filters, you can pass your own instance of jade as the `jade` option:
-
-```javascript
-var jade = require('jade');
-var gulpJade = require('gulp-jade');
-var katex = require('katex');
-
-jade.filters.katex = katex.renderToString;
-jade.filters.shoutFilter = function (str) {
-  return str + '!!!!';
-}
-
-gulp.task('jade', function () {
-  return gulp.src('public/**/*.jade')
-    .pipe(gulpJade({
-      jade: jade,
-      pretty: true
-    }))
-    .pipe(gulp.dest('public/'))
-})
-```
-
-## AMD
-
-If you are trying to wrap your Jade template functions in an AMD wrapper, use [`gulp-wrap-amd`](https://github.com/phated/gulp-wrap-amd)
-
-```javascript
-var jade = require('gulp-jade');
-var wrap = require('gulp-wrap-amd');
-
-gulp.task('templates', function() {
-  gulp.src('./lib/*.jade')
-    .pipe(jade({
-      client: true
-    }))
-    .pipe(wrap({
-      deps: ['jade'],
-      params: ['jade']
-    }))
-    .pipe(gulp.dest('./dist/'))
-});
-```
-
-## Use with [gulp-data](https://www.npmjs.org/package/gulp-data)
-
-As an alternative, the ```gulp-data``` plugin, is a standard method for piping data down-stream to other plugins that need data in the form of a new file property ```file.data```. If you have data from a JSON file, front-matter, a database, or anything really, use ```gulp-data``` to pass that data to gulp-jade.
-
-Retrieve data from a JSON file, keyed on file name:
-
-```
-var getJsonData = function(file, cb) {
-  var jsonPath = './examples/' + path.basename(file.path) + '.json';
-  cb(require(jsonPath));
-};
-
-gulp.task('json-test', function() {
-  return gulp.src('./examples/test1.html')
-    .pipe(data(getJsonData))
-    .pipe(jade())
-    .pipe(gulp.dest('build'));
-});
-```
-
-Since gulp-data provides a callback, it means you can get data from a database query as well:
-
-```
-var getMongoData = function(file, cb) {
-  MongoClient.connect('mongodb://127.0.0.1:27017/gulp-data-test', function(err, db) {
-    var collection = db.collection('file-data-test');
-    collection.findOne({filename: path.basename(file.path)}, function(err, doc) {
-      db.close();
-      cb(doc);
-    });
-  });
-};
-
-gulp.task('db-test', function() {
-  return gulp.src('./examples/test3.html')
-    .pipe(data(getMongoData))
-    .pipe(jade())
-    .pipe(gulp.dest('build'));
-});
-````
-
-More info on [gulp-data](https://www.npmjs.org/package/gulp-data)
 
 ## LICENSE
 
 (MIT License)
 
-Copyright (c) 2013 Blaine Bublitz
+Copyright (c) 2013 bleech
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

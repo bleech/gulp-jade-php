@@ -12,7 +12,7 @@ jade.filters.shout = function(str){
   return str.toUpperCase() + '!!!!';
 };
 
-var filePath = path.join(__dirname, 'fixtures', 'filters.jade');
+var filePath = path.join(__dirname, 'fixtures', 'filters.php.jade');
 var base = path.join(__dirname, 'fixtures');
 var cwd = __dirname;
 
