@@ -1,10 +1,11 @@
 {
   "name": "gulp-jade-php",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Compile Jade templates to PHP",
   "keywords": [
     "jade",
     "jade-php",
+    "jade2php",
     "php",
     "gulpplugin",
     "stream",
@@ -14,10 +15,9 @@
   "author": "bleech <hello@bleech.de>",
   "dependencies": {
     "gulp-util": "~2.2",
-    "jade": "~0.35.0",
-    "jade-php": "~0.1.2",
-    "through2": "^0.5.1",
-    "xtend": "^4.0.0"
+    "jade2php": "^1.2.1",
+    "merge": "^1.2.0",
+    "through2": "^0.5.1"
   },
   "main": "index.js",
   "engines": {
